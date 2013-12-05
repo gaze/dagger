@@ -65,12 +65,7 @@ type RewriteDB = M.Map Ref Ref
 
 data Shit = Shit
 
-performArgumentSubstitution :: TACOp -> RewriteDB -> TACOp
-performArgumentSubstitution (UnOpTac op arg) rwDB = UnOpTac op (gs arg)
-    where
-        gs x = M.findWithDefault x x rwDB
-
-performArgumentSubstitution (BinOpTac op a b) rwDB = BinOpTac op (gs a) (gs b)
+performArgumentSubstitution x rwDB = mat x
     where
         gs x = M.findWithDefault x x rwDB
         mat (BinOpTac op a b) = BinOpTac op (gs a) (gs b)
